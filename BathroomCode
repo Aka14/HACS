@@ -1,0 +1,53 @@
+package Day1;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class BathroomSecurity {
+    public static void main(String[] args) {
+//        int[][] arr = new int[][]{
+//                {1, 2, 3},
+//                {4, 5, 6},
+//                {7, 8, 9},
+//        };
+        int place = 5;
+        ArrayList<Integer> code = new ArrayList<Integer>();
+        ArrayList<Character> list = new ArrayList<Character>();
+        try {
+            Scanner reader = new Scanner(new File("src/Day1/Input2"));
+
+            while (reader.hasNextLine()) {
+                String input = reader.next();
+                for (int i = 0; i < input.length(); i++) {
+                    list.add(input.charAt(i));
+                    if (list.get(i) == 'U') {
+                        if (place > 3) {
+                            place -= 3;
+                        }
+                    }
+                    if (list.get(i) == 'D') {
+                        if (place < 7) {
+                            place += 3;
+                        }
+                    }
+                    if (list.get(i) == 'R') {
+                        if (place % 3 != 0) {
+                            place++;
+                        }
+                    }
+                    if (list.get(i) == 'L') {
+                        if (place % 3 != 1) {
+                            place--;
+                        }
+                    }
+                }
+                code.add(place);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(code);
+    }
+}
